@@ -1,11 +1,13 @@
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import './style.css';
 import Navbar from 'react-bootstrap/Navbar';
 
 function NavBar() {
     return (
         <>
+            <header class='o-header'/>
             <Navbar bg="light" data-bs-theme="light">
                 <Container>
                     <Navbar.Brand href="#home">Navbar</Navbar.Brand>

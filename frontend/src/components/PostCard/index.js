@@ -17,7 +17,7 @@ function PostCard() {
             <h5 id='post-card-title'>Title</h5>
 
             <div className='card-post-content'>
-                lsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjf lsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjf
+                dkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjf
             </div>
 
             <div className='footer-post-card'>
