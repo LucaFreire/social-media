@@ -1,0 +1,13 @@
+.main-home {
+    background-color: rgb(242, 243, 243);
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    width: 100vw;
+    height: 94vh;
+}
+
+.post-section {
+    flex-direction: column;
+    padding: 20px;
+}

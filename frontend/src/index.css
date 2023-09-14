@@ -1,13 +1,27 @@
+* {
+  font-family: 'Bosch Sans';
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Bosch Sans Light';
+}
+
+@font-face {
+  font-family: 'Bosch Sans Light';
+  src: url('../public/BoschSans-Light.eot');
+  src: url('../public/BoschSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('../public/BoschSans-Light.woff') format('woff'),
+    url('../public/BoschSans-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
