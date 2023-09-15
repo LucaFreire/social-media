@@ -23,8 +23,8 @@ function PostCard() {
             <div className='footer-post-card'>
                 <i class={
                     isLiked ? 
-                    "ri-heart-3-fill tam" :
-                    "ri-heart-3-line tam"
+                    "ri-heart-3-fill icon-size" :
+                    "ri-heart-3-line icon-size"
                 } onClick={ () => likePost()}></i>
             </div>
 
