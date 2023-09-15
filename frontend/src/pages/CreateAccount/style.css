@@ -1,0 +1,14 @@
+.main-create-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 94vh;
+    background-color: rgb(221, 226, 226);
+}
+
+#back-register-btn {
+    display: flex;
+    align-self: start;
+    justify-self: start;
+    margin-left: 20px;
+}

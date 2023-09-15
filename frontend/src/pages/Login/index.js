@@ -12,7 +12,7 @@ function Login() {
     const [password, setPassword] = useState('');
 
     function handleLogin() {
-        
+
     }
 
 
@@ -21,7 +21,7 @@ function Login() {
         <div className="main-login">
             <div className='card-login'>
                 <h4>Social Media</h4>
-                <Form className='formsss'>
+                <Form className='forms-login'>
                     <Form.Group className="mb-3 inputs-login" controlId="exampleForm.ControlInput1">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control onChange={(e) => setEmail(e.target.value)} type="email" placeholder="name@example.com" />
@@ -32,7 +32,7 @@ function Login() {
                     </Form.Group>
                 </Form>
                 <Button onClick={() => handleLogin()} variant="outline-" id='login-button'>Login</Button>
-                <button onClick={() => navigate('createAccount')} id='create-account-btn'>create a new account</button>
+                <button onClick={() => navigate('createAccount')} className='text-btn'>create a new account</button>
             </div>
         </div>
     );
