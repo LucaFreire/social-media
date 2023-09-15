@@ -26,7 +26,7 @@ function CreateAccount() {
                 <Form className='forms-login'>
                     <Form.Group className="mb-3 inputs-login">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control onChange={(e) => setName(e.target.value)} type="text" placeholder="Type your name" />
+                        <Form.Control onChange={(e) => setName(e.target.value)} type="text" placeholder="Type your mame" />
                     </Form.Group>
                     <Form.Group className="mb-3 inputs-login">
                         <Form.Label>BirthDate</Form.Label>
