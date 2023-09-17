@@ -4,4 +4,4 @@ class jwtService {
 
 }
 
-export default jwtController;
+export default jwtService;

@@ -20,4 +20,4 @@ class securityService {
 
 }
 
-export default securityController;
+export default securityService;
