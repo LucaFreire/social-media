@@ -1,2 +1,2 @@
-authController: 
+authService: 
     ☐ register: isNewUser

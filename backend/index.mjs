@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import './startup/loadEnv.mjs';
 import startupDB from './startup/db.mjs';
 import startupRoute from './startup/routes.mjs'
 

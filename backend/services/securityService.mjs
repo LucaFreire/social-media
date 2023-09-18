@@ -1,4 +1,4 @@
-import { decodeBase64, encodeBase64 } from 'bcryptjs';
+const { decodeBase64, encodeBase64 } = 'bcryptjs';
 import { sha256, sha224 } from 'js-sha256';
 
 class securityService {
