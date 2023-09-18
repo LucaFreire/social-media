@@ -2,7 +2,8 @@ import './style.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import axios from 'axios'
 
 
 function CreateAccount() {
@@ -13,12 +14,37 @@ function CreateAccount() {
     const [password, setPassword] = useState('');
     const [birthdate, setBirthdate] = useState('');
 
-    function handleRegister() {
+    const [isEmptyInput, setIsEmptyInput] = useState(false);
+    const [isCreated, setIsCreated] = useState(false);
 
-    }
+    const handleRegister = useCallback(async () => {
+        if (!name || !email || !password || !birthdate) {
+            setIsEmptyInput(true);
+            return;
+        }
+
+        const encryptPassword = Crypto.AES.encrypt(password, process.env.passwordSecret).toString();
+
+        const newUser = {
+            name: name,
+            email: email,
+            birthdate: birthdate,
+            password: encryptPassword
+        };
+
+        try {
+            const res = await axios.post(process.env.registerRoute, newUser);
+            setIsCreated(true);
+            console.log(res)
+        } catch (error) {
+            console.log(error)
+            setIsCreated(false);
+        }
+    });
 
     return (
         <div className="main-create-account">
+            <header class='line-header' />
 
             <div className='card-login'>
                 <button onClick={() => navigate('/')} className='text-btn' id='back-register-btn'>Back</button>
@@ -26,7 +52,7 @@ function CreateAccount() {
                 <Form className='forms-login'>
                     <Form.Group className="mb-3 inputs-login">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control onChange={(e) => setName(e.target.value)} type="text" placeholder="Type your mame" />
+                        <Form.Control onChange={(e) => setName(e.target.value)} type="text" placeholder="Type your name" />
                     </Form.Group>
                     <Form.Group className="mb-3 inputs-login">
                         <Form.Label>BirthDate</Form.Label>
@@ -41,6 +67,7 @@ function CreateAccount() {
                         <Form.Control onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Type your password" />
                     </Form.Group>
                 </Form>
+                <p>{isEmptyInput ? "Empty inputs" : ""}</p>
                 <Button onClick={() => handleRegister()} variant="outline-" id='login-button'>Register</Button>
             </div>
         </div>

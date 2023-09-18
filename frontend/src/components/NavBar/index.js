@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 function NavBar() {
     return (
         <>
-            <header class='o-header'/>
+            <header class='line-header'/>
             <Navbar bg="light" data-bs-theme="light">
                 <Container>
                     <Navbar.Brand href="#home">Social Media</Navbar.Brand>
