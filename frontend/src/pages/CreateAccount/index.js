@@ -24,17 +24,17 @@ function CreateAccount() {
             return;
         }
 
-        const encryptPassword = Crypto.AES.encrypt(password, process.env.passwordSecret).toString();
-
         const newUser = {
             name: name,
             email: email,
             birthdate: birthdate,
-            password: encryptPassword
+            password: password
         };
 
+        const encryptData = Crypto.AES.encrypt(JSON.stringify(newUser), process.env.REACT_APP_ENCRYPT_JSON).toString();
+
         try {
-            const res = await axios.post(process.env.registerRoute, newUser);
+            const res = await axios.post(process.env.REACT_APP_BACK_SERVER + "auth/register", { encryptData: encryptData });
             setIsCreated(true);
             console.log(res)
         } catch (error) {

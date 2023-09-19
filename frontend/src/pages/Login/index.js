@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './style.css';
 import axios from 'axios';
+import Crypto from 'crypto-js';
 import { useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -25,16 +26,23 @@ function Login() {
 
     const handleLogin = useCallback(async () => {
         if (!email)
-            setIsEmailEmpty = true;
+            setIsEmailEmpty(true);
 
         if (!password)
-            setIsPasswordEmpty = true;
+            setIsPasswordEmpty(true);
 
-        if (!isPasswordEmpty || !isEmailEmpty)
+        if (isPasswordEmpty || isEmailEmpty)
             return;
 
+        const login = {
+            email: email,
+            password: password
+        };
+
+        const encryptData = Crypto.AES.encrypt(JSON.stringify(login), process.env.REACT_APP_ENCRYPT_JSON).toString();
+
         try {
-            const res = await axios.post(process.env.loginRoute, { email: email, password: password }); // TODO: fix the .env
+            const res = await axios.post(process.env.REACT_APP_BACK_SERVER + "auth/login", { encryptData: encryptData} );
             sessionStorage.setItem('token', res.data.token);
             setNotFound(false);
             navigate('home')
@@ -45,7 +53,7 @@ function Login() {
 
     return (
         <div className="main-login">
-            <header class='line-header'/>
+            <header class='line-header' />
             <div className='card-login'>
                 <h4>Social Media</h4>
                 <Form className='forms-login'>

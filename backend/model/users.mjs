@@ -5,7 +5,6 @@ const Users = mongoose.model('Users', {
     email: String,
     birthdate: Date,
     hashCode: String,
-    salt: String
 });
 
 export default Users;

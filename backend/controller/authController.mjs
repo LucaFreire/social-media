@@ -1,29 +1,33 @@
 import Users from '../model/users.mjs'
-import securityService from '../services/securityservice.mjs';
+import jwt from 'jsonwebtoken';
+import CryptoJS from 'crypto-js';
+import bcrypt from 'bcryptjs';
 
 class authController {
     static async register(req, res) {
-        const { name, email, birthdate, password } = req.body;
+        const { encryptData } = req.body;
+        console.log(encryptData)
 
-        // TODO: isNewUser
+        if (!encryptData)
+            return res.status(400).send({ message: "Null value" });
 
-        if (!name || !email || !birthdate || !password)
-            return res.status(400).send({ message: "Null input(s)" });
+        const bytes = CryptoJS.AES.decrypt(encryptData, process.env.DECRYPT_JSON);
+        const decrypted = bytes.toString(CryptoJS.enc.Utf8);
 
-        const bytes = CryptoJS.AES.decrypt(password, process.env.PASSWORDSECRET);
-        const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
+        const userValues = JSON.parse(decrypted);
+        const { email, password, name, birthdate } = userValues;
 
-        const salt = securityService.GenerateSalt();
-        const hash = securityService.ApplyHash(originalPassword, salt);
+        const salt = await bcrypt.genSalt(12);
+        const hashPassword = await bcrypt.hash(password, salt);
 
         const user = new Users({
-            name: name,
             email: email,
-            birthdate: birthdate,
-            hashCode: hash,
-            salt: salt
+            hashCode: hashPassword,
+            name: name,
+            birthdate: birthdate
         });
 
+        // TODO: isNewUser
         try {
             const userResponse = await user.save();
             return res.status(200).send(userResponse);
@@ -33,24 +37,26 @@ class authController {
     }
 
     static async login(req, res) {
-        const { email, password } = req.body;
+        const { encryptData } = req.body;
 
-        if (!email || !password)
-            return res.status(401).send({ message: "Null Input(s)" });
+        if (!encryptData)
+            return res.status(400).send({ message: "Null value" });
 
+        const bytes = CryptoJS.AES.decrypt(encryptData, process.env.DECRYPT_JSON);
+        const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+        const loginValues = JSON.parse(decrypted);
+
+        const { email, password } = loginValues;
+        console.log(password);
         try {
             const user = await Users.findOne({ email: email });
             if (!user)
                 return res.status(400).send({ message: "Not Found" });
 
-            const bytes = CryptoJS.AES.decrypt(password, process.env.PASSWORDSECRET);
-            const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
-            const hash = securityService.ApplyHash(originalPassword, user.salt);
-
-            if (user.hashCode != hash)
+            if (!await bcrypt.compare(password, user.hashCode))
                 return res.status(400).send({ message: "Invalid password or email" });
 
-            const secret = process.env.SECRET;
+            const secret = process.env.JWT_SECRET;
             const token = jwt.sign(
                 {
                     id: user._id
@@ -63,6 +69,7 @@ class authController {
             return res.status(200).send({ token: token })
 
         } catch (error) {
+            console.log(error)
             res.status(500).send({ error: error })
         }
 

@@ -4,7 +4,7 @@ import authRouter from '../routes/authRoute.mjs';
 
 function startupRoute(app) {
     app.use(express.json());
-    app.use('/users', authRouter);
+    app.use('/auth', authRouter);
 }
 
 export default startupRoute;
