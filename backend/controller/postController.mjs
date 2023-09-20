@@ -51,13 +51,14 @@ class postController {
         try {
             const post = Post.findById(postId);
             var flagLike = false;
-            
+
             post.likes.array.forEach(userLike => {
                 if (userLike === userId) {
                     flagLike = true;
                     return;
                 }
             });
+
 
             if (!flagLike)
                 postService.like(userId, post);
