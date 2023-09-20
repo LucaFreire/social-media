@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './style.css'
 
 
-function PostCard() {
+function PostCard({ list }) {
 
     const [isLiked, setIsLiked] = useState(false)
 
@@ -10,26 +10,29 @@ function PostCard() {
         setIsLiked(!isLiked)
     }
 
-    return (
-    <>
-        <div className='container-card-box flex-center'>
+    return list.map((post, i, ay) => {
+        return (
+            <div className='container-card-box flex-center'>
 
-            <h5 id='post-card-title'>Title</h5>
+                <h5 id='post-card-title'>{post.title}</h5>
 
-            <div className='card-post-content'>
-                dkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjflsdkflksdnfkdsfsdlkfnlksdnf lsdkjflsdjf
+                <div className='card-post-content'>
+                    {post.content}
+                </div>
+
+                <div className='footer-post-card'>
+                    <i class={
+                        isLiked ?
+                            "ri-heart-3-fill icon-size" :
+                            "ri-heart-3-line icon-size"
+                    } onClick={() => likePost()}></i>
+
+                </div>
+                <br />
             </div>
+        )
+    });
 
-            <div className='footer-post-card'>
-                <i class={
-                    isLiked ? 
-                    "ri-heart-3-fill icon-size" :
-                    "ri-heart-3-line icon-size"
-                } onClick={ () => likePost()}></i>
-            </div>
-
-        </div>
-    </>)
 }
 
 export default PostCard;

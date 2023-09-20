@@ -3,11 +3,11 @@
     display: flex;
     justify-content: center;
     gap: 35px;
-    width: 100vw;
-    height: 94vh;
+    width: 100%;
+    height: auto;
 }
 
 .post-section {
     flex-direction: column;
-    padding: 20px;
+    padding: 80px;
 }

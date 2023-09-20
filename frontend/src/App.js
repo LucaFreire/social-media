@@ -18,7 +18,6 @@ function App() {
           <ProtectedRoute
             Denied={<Denied />}
             Target={<NavBar />} />} >
-
           <Route path='home' element={<Home />} />
         </Route>
       </Routes>
