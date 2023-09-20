@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const Post = mongoose.model('Post', {
     title: String,
     content: String,
-    likes: [{ ObjectId }],
-    authorId: ObjectId,
+    likes: [{ Object }],
+    authorId: Object,
     comments: {
         content: String,
         likes: Number
