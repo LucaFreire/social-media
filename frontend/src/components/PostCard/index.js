@@ -10,7 +10,7 @@ function PostCard({ list }) {
         setIsLiked(!isLiked)
     }
 
-    return list.map((post, i, ay) => {
+    return list.map((post) => {
         return (
             <div className='container-card-box flex-center'>
 
@@ -23,9 +23,10 @@ function PostCard({ list }) {
                 <div className='footer-post-card'>
                     <i class={
                         isLiked ?
-                            "ri-heart-3-fill icon-size" :
-                            "ri-heart-3-line icon-size"
+                        "ri-heart-3-fill icon-size" :
+                        "ri-heart-3-line icon-size"
                     } onClick={() => likePost()}></i>
+                    {post.likes.length - 1}
 
                 </div>
                 <br />

@@ -11,21 +11,21 @@ function NavBar() {
     return (
         <>
 
-                <header class='line-header' />
-                <Navbar id='main-nav-bar' bg="light" data-bs-theme="light">
-                    <Container>
-                        <Navbar.Brand href="#home">Social Media</Navbar.Brand>
-                        <Nav className="me-auto">
-                            <CreatePost />
-                        </Nav>
-                    </Container>
-                </Navbar>
-                <Outlet></Outlet>
-                <></>
-            </>
-            );
+            <header class='line-header' />
+            <Navbar bg="light" data-bs-theme="light">
+                <Container>
+                    <Navbar.Brand>Social Media</Navbar.Brand>
+                    <Nav className="me-auto">
+                        <CreatePost />
+                    </Nav>
+                </Container>
+            </Navbar>
+            <Outlet></Outlet>
+            <></>
+        </>
+    );
 }
 
-            export default NavBar;
+export default NavBar;
 
 
