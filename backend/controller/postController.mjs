@@ -49,24 +49,36 @@ class postController {
 
         const userId = Jwt.verify(jwt, process.env.JWT_SECRET).id;
         try {
-            const post = Post.findById(postId);
-            var flagLike = false;
 
-            post.likes.array.forEach(userLike => {
-                if (userLike === userId) {
-                    flagLike = true;
-                    return;
-                }
-            });
+            const post = await Post.findById(postId);
 
+            var isLiked = post.likes.includes(userId)
+            var liked;
 
-            if (!flagLike)
-                postService.like(userId, post);
+            if (!isLiked)
+                liked = postService.like(userId, postId);
             else
-                postService.deslike(userId, post);
+                liked = postService.deslike(userId, postId);
 
+            return res.status(200).send({ liked: liked });
         } catch (error) {
             console.log(error);
+            return res.status(500).send({ message: error })
+        }
+    }
+
+    static async isLiked(req, res) {
+        const { jwt, postId } = req.body;
+
+        if (!jwt || !postId)
+            return res.status(400).send({ message: "Null Values" });
+
+        const userId = Jwt.verify(jwt, process.env.JWT_SECRET).id;
+        try {
+            const isLiked = postService.isLiked(userId, postId);
+            return res.status(200).send({ value: isLiked });
+        }
+        catch (error) {
             return res.status(500).send({ message: error })
         }
     }

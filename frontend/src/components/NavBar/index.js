@@ -10,7 +10,6 @@ function NavBar() {
 
     return (
         <>
-
             <header class='line-header' />
             <Navbar bg="light" data-bs-theme="light">
                 <Container>

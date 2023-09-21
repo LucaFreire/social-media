@@ -12,10 +12,9 @@ function Home() {
 
     const getPosts = useCallback(async () => {
         try {
-
             const res = await axios.get(process.env.REACT_APP_BACK_SERVER + 'post/getAll');
-            console.log(res)
             setPosts(res.data);
+            console.log(res.data)
         } catch (error) {
             console.log(error);
         }

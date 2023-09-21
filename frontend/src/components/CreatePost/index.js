@@ -27,7 +27,6 @@ function CreatePost() {
         };
 
         const jwt = sessionStorage.getItem('token');
-        console.log('sd');
         console.log(jwt);
 
         try {
